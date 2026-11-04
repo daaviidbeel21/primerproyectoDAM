@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class EJ4 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Introduce la expresión matemática: ");
+        String expresión = sc.nextLine().trim();
+
+        int resultado = calculadora(expresión);
+
+        System.out.println("El resultado es: " + resultado);
+    }
+
+    public static int calculadora (String expresion){
+        expresion = expresion.replaceAll(" ","");
+        int [] valores = new int [expresion.length()]; //aqui es donde se agrupan los numeros
+        int contadorValores = 0;
+
+        int numeroActual = 0;
+        char operadorPrevio = '+';
+
+        for (int i = 0; i < expresion.length(); i++){
+            char c = expresion.charAt(i);
+
+            if (Character.isDigit(c)){
+                numeroActual = numeroActual * 10 + (c - '0');
+            }
+
+            if (!Character.isDigit(c) || i == expresion.length() - 1){
+                if (operadorPrevio == '+'){
+                    valores[contadorValores++] = numeroActual; //ESTO LO ES PARA METERLO EN UNA CAJA Y HACERLO DESPUES
+                } else if (operadorPrevio == '-'){
+                    valores[contadorValores--] = numeroActual;
+                } else if (operadorPrevio  == '*'){
+                    valores[contadorValores - 1] = valores[contadorValores - 1] * numeroActual; // LO RESUELVES AHORA Y LO METES EN UNA CAJA,
+                } else if (operadorPrevio == '/'){
+                    valores[contadorValores - 1] = valores[contadorValores - 1] / numeroActual;
+                }
+
+                operadorPrevio = c;
+                numeroActual= 0;
+            }
+        }
+        int resultadoFinal = 0; //SE SUMAN TODAS LAS "CAJAS" CREADAS.
+        for (int i = 0; i < contadorValores; i++){
+            resultadoFinal += valores[i];
+        }
+        return  resultadoFinal;
+    }
+}
