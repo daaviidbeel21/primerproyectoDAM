@@ -1,0 +1,35 @@
+import java.util.Scanner;
+
+public class EJ2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Introduce la cadena que quieres comprimir: ");
+        String texto = sc.nextLine().trim(); //Sirve para limpiar el texto introducido de espacios en blanco.
+
+        String resultado = comprimirCadena(texto);
+
+        System.out.println("Entrada: \"" + texto + "\"");
+        System.out.println("Salida: \"" + resultado + "\"");
+
+    }
+
+    public static String comprimirCadena(String texto){
+        if (texto.isEmpty()){ //Para que si metes el texto en blanco te lo devuelva en blanco.
+            return "";
+        }
+        String comprimido = "";
+        int contador =1;
+
+        for (int i = 0; i < texto.length(); i++){
+            if (i + 1 < texto.length() && texto.charAt(i) == texto.charAt(i+1)){
+                contador++;
+            }else {
+                comprimido = comprimido + texto.charAt(i) + contador;
+
+                contador = 1;
+            }
+        }
+        return comprimido;
+    }
+}
