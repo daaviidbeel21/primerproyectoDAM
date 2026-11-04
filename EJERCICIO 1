@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class EJ1 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Introduce el nombre del archivo COMPLETO: ");
+        String nombreArchivo = sc.nextLine().trim();
+
+        if (validacion(nombreArchivo)){
+            String [] partes = nombreArchivo.split("\\."); //Sirve para separar a partir del punto
+            String extension = partes [1];
+
+            System.out.println("Es una extensión correcta. ");
+        }else{
+            System.out.println("NO es una extensión correcta. ");
+        }
+    }
+
+    public static boolean validacion (String nombreArchivo){
+
+        String [] partes = nombreArchivo.split("\\.");
+        return partes.length == 2 && !partes[0].isEmpty() && !partes[1].isEmpty();
+    }
+    }
